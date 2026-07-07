@@ -22,12 +22,14 @@ import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import CircularProgress from '@mui/material/CircularProgress';
+import Menu from '@mui/material/Menu';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import SendIconMui from '@mui/icons-material/Send';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import TerminalIcon from '@mui/icons-material/Terminal';
+import DownloadIcon from '@mui/icons-material/Download';
 import CardTypePills from '../../components/CardTypePills';
 import OutputBlock from '../../components/OutputBlock';
 import ApiOverlay from '../../components/ApiOverlay';
@@ -35,6 +37,7 @@ import JsonEditor from '../../components/JsonEditor';
 import { useAppConfig } from '../../context/ConfigContext';
 import { sendRequest, prepareRequest } from '../../api/send';
 import { fetchOAuthStatus, fetchOAuthToken, refreshOAuthToken } from '../../api/oauth';
+import { downloadReport } from '../../utils/report';
 import type { TraceRecord, OAuthTokenInfo, Endpoint } from '../../types';
 
 const MODULE_ID = 'pts';
@@ -80,6 +83,7 @@ export default function SendRequest() {
   const [curlCopied, setCurlCopied]         = useState(false);
   const [draftCurlCopied, setDraftCurlCopied] = useState(false);
   const [draftCurlLoading, setDraftCurlLoading] = useState(false);
+  const [downloadAnchor, setDownloadAnchor] = useState<HTMLElement | null>(null);
 
   async function copyDraftCurl() {
     if (!activeCardType || !endpoint) return;
@@ -511,11 +515,33 @@ export default function SendRequest() {
                       color={curlCopied ? 'success' : 'inherit'}
                       startIcon={curlCopied ? <ContentCopyIcon /> : <TerminalIcon />}
                       onClick={copyCurl}
-                      sx={{ ml: 'auto', borderRadius: 2, fontSize: '0.72rem', py: 0.3, px: 1.2, transition: 'all 0.2s' }}
+                      sx={{ ml: result && !loading ? 0 : 'auto', borderRadius: 2, fontSize: '0.72rem', py: 0.3, px: 1.2, transition: 'all 0.2s' }}
                     >
                       {curlCopied ? 'Copied!' : 'Copy cURL'}
                     </Button>
                   </Tooltip>
+                )}
+                {result && !loading && (
+                  <>
+                    <Button
+                      size="small"
+                      variant="outlined"
+                      color="inherit"
+                      startIcon={<DownloadIcon />}
+                      onClick={e => setDownloadAnchor(e.currentTarget)}
+                      sx={{ ml: 'auto', borderRadius: 2, fontSize: '0.72rem', py: 0.3, px: 1.2 }}
+                    >
+                      Download Report
+                    </Button>
+                    <Menu anchorEl={downloadAnchor} open={!!downloadAnchor} onClose={() => setDownloadAnchor(null)}>
+                      <MenuItem onClick={() => { if (result) downloadReport(result, 'html'); setDownloadAnchor(null); }}>
+                        Download as HTML
+                      </MenuItem>
+                      <MenuItem onClick={() => { if (result) downloadReport(result, 'pdf'); setDownloadAnchor(null); }}>
+                        Download as PDF
+                      </MenuItem>
+                    </Menu>
+                  </>
                 )}
               </Box>
 
