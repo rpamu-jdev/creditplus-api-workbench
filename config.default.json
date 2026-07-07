@@ -1,0 +1,138 @@
+{
+  "cardTypes": {
+    "credit": {
+      "label": "Credit Card",
+      "baseUrl": "http://10.137.160.59:37443",
+      "oauthBaseUrl": "",
+      "publicKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvZB/Tcg5aVFzYo7XcRzSSTU0ToQkoVLRm3eTHx+bDx1nBC8TrTVM62JfKAhWfEMJQZ+m0/IhT4pt0JRmUDdWvEPegD/OezOXUOEWuw5Vp0+maUNzPusz2gW4ezKXQ0i3R0/fTK2/wGDsYS3bwm1bbrPJA6XL+EYkQAjUZ81eHxpsrIS1BUQo4dqkotJeltKMvSDod96O3fxSssmjw+QXblPbeIV9NzoBVJMICMTpYOAtN55VAyu73Ukes2WvEntxflAeRv0cK4xUkVzuCG2X1YMXBtCpmdP0rrGb7ngnBIiVnl0/nuAALlkw58thZ63ue/2bJQ8kiJMr0IzRZndN3QIDAQAB",
+      "aesPublicKey": "",
+      "endpoints": [
+        {
+          "path": "deviceapi/apis/v2/services/client/profileInfo",
+          "samples": [
+            {
+              "name": "Default",
+              "payload": "{\n  \"formFactorType\": \"CPI\",\n  \"timestamp\": \"1716000000000\"\n}"
+            }
+          ],
+          "headers": {}
+        },
+        {
+          "path": "deviceapi/apis/v2/services/client/cardDetails",
+          "samples": [
+            {
+              "name": "Default",
+              "payload": "{\n  \"cardId\": \"REPLACE_ME\",\n  \"timestamp\": \"1716000000000\"\n}"
+            }
+          ],
+          "headers": {}
+        },
+        {
+          "path": "deviceapi/apis/v2/services/client/setPin",
+          "samples": [
+            {
+              "name": "Default",
+              "payload": "{\n  \"cardId\": \"REPLACE_ME\",\n  \"pin\": \"1234\",\n  \"timestamp\": \"1716000000000\"\n}"
+            }
+          ],
+          "headers": {}
+        }
+      ],
+      "headers": {
+        "Content-Type": "application/json",
+        "Encryption-Algorithm": "DES168"
+      }
+    },
+    "debit": {
+      "label": "Debit Card",
+      "baseUrl": "http://10.137.160.59:37443",
+      "oauthBaseUrl": "",
+      "publicKey": "",
+      "aesPublicKey": "",
+      "endpoints": [
+        {
+          "path": "deviceapi/apis/v2/services/debit/profileInfo",
+          "samples": [
+            {
+              "name": "Default",
+              "payload": "{\n  \"formFactorType\": \"CPI\",\n  \"timestamp\": \"1716000000000\"\n}"
+            }
+          ],
+          "headers": {}
+        },
+        {
+          "path": "deviceapi/apis/v2/services/debit/cardDetails",
+          "samples": [
+            {
+              "name": "Default",
+              "payload": "{\n  \"cardId\": \"REPLACE_ME\",\n  \"timestamp\": \"1716000000000\"\n}"
+            }
+          ],
+          "headers": {}
+        },
+        {
+          "path": "deviceapi/apis/v1/services/pin/authenticatepinset",
+          "requiresPinBlock": true,
+          "samples": [
+            {
+              "name": "Authenticate PIN Set",
+              "payload": "{\n  \"deviceNumber\": \"5293607600000233\",\n  \"apiReferenceNumber\": \"REPLACE_ME\",\n  \"timestamp\": \"1716000000000\"\n}"
+            }
+          ],
+          "headers": {}
+        }
+      ],
+      "headers": {
+        "Content-Type": "application/json",
+        "Encryption-Algorithm": "DES168"
+      }
+    },
+    "prepaid": {
+      "label": "Prepaid Card",
+      "baseUrl": "http://10.137.160.59:37443",
+      "oauthBaseUrl": "",
+      "publicKey": "",
+      "aesPublicKey": "",
+      "endpoints": [
+        {
+          "path": "deviceapi/apis/v2/services/prepaid/profileInfo",
+          "samples": [
+            {
+              "name": "Default",
+              "payload": "{\n  \"formFactorType\": \"CPI\",\n  \"timestamp\": \"1716000000000\"\n}"
+            }
+          ],
+          "headers": {}
+        },
+        {
+          "path": "deviceapi/apis/v2/services/prepaid/balance",
+          "samples": [
+            {
+              "name": "Default",
+              "payload": "{\n  \"cardId\": \"REPLACE_ME\",\n  \"timestamp\": \"1716000000000\"\n}"
+            }
+          ],
+          "headers": {}
+        }
+      ],
+      "headers": {
+        "Content-Type": "application/json",
+        "Encryption-Algorithm": "DES168"
+      }
+    }
+  },
+  "encryption": {
+    "algorithm": "DES",
+    "keyLength": 168,
+    "mode": "STRING",
+    "ivHex": "99999999999999999999999999999999",
+    "aesKeyLength": 256,
+    "oaepDigest": "NONE"
+  },
+  "oauth": {
+    "tokenUrl": "",
+    "refreshUrl": "",
+    "username": "",
+    "apiKey": ""
+  }
+}

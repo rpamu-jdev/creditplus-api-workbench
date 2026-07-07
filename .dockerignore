@@ -1,0 +1,16 @@
+node_modules
+client/node_modules
+client-dist
+.git
+.gitignore
+.dockerignore
+.claude
+k8s
+test-encryption.js
+config.json
+.DS_Store
+.vscode
+.idea
+*.log
+npm-debug.log
+README.md

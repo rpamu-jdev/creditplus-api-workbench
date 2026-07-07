@@ -1,0 +1,106 @@
+# ─── APILeela ─ Kubernetes deployment ───────────────────────────────
+# Built by rpamu@extio.io · Extio
+#
+# Apply with:
+#   kubectl apply -f k8s/deployment.yaml
+#
+# Then reach the UI on http://<node-ip>:30300
+# ──────────────────────────────────────────────────────────────────────────────
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: pts-tools
+  labels:
+    owner: rpamu
+    company: Extio
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: apileela-config
+  namespace: pts-tools
+data:
+  MONGO_URL: "mongodb://192.168.1.99:37017/"
+  MONGO_DB:  "pts_sanity_tester"
+  PORT:      "3000"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apileela
+  namespace: pts-tools
+  labels:
+    app: apileela
+    owner: rpamu
+    company: Extio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apileela
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: apileela
+    spec:
+      containers:
+        - name: app
+          image: apileela:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: apileela-config
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 3
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            timeoutSeconds: 5
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "128Mi"
+            limits:
+              cpu: "300m"
+              memory: "256Mi"
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            runAsUser: 1000
+            capabilities:
+              drop: ["ALL"]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: apileela
+  namespace: pts-tools
+  labels:
+    app: apileela
+spec:
+  type: NodePort
+  selector:
+    app: apileela
+  ports:
+    - name: http
+      port: 3000
+      targetPort: http
+      nodePort: 30300
+      protocol: TCP

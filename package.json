@@ -1,0 +1,18 @@
+{
+  "name": "pts-encrypted-request-gui",
+  "version": "1.0.0",
+  "description": "GUI for posting encrypted PTS requests (Credit / Debit / Prepaid)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev:server": "node server.js",
+    "dev:client": "cd client && npm run dev",
+    "build": "cd client && npm run build",
+    "build:start": "npm run build && node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^4.19.2",
+    "mongodb": "^6.5.0"
+  }
+}
