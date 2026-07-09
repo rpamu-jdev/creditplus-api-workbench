@@ -810,6 +810,84 @@ export default function Config() {
         <Button variant="outlined" color="error" onClick={handleReset} sx={{ ml: 'auto' }}>Reset to Defaults</Button>
       </Box>
 
+      {/* Developer credit */}
+      <Box sx={{ mt: 4, pt: 2.5, borderTop: '1px solid', borderColor: 'divider' }}>
+        <Typography variant="caption" color="text.disabled" sx={{
+          fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.08em',
+          textTransform: 'uppercase', display: 'block', mb: 1.5,
+        }}>
+          Developers
+        </Typography>
+      <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+
+        {/* rpamu card */}
+        <Box sx={{
+          display: 'inline-flex', alignItems: 'center', gap: 1.25,
+          px: 1.5, py: 1, borderRadius: 2.5,
+          border: '1px solid',
+          borderColor: t => t.palette.mode === 'dark' ? 'rgba(129,140,248,0.25)' : 'rgba(99,102,241,0.2)',
+          bgcolor: t => t.palette.mode === 'dark' ? 'rgba(129,140,248,0.06)' : 'rgba(99,102,241,0.04)',
+          position: 'relative', overflow: 'hidden',
+          '&::before': {
+            content: '""', position: 'absolute',
+            top: 0, left: 0, right: 0, height: '2px',
+            background: 'linear-gradient(90deg, #6366f1, #818cf8)',
+          },
+        }}>
+          <Box sx={{
+            width: 30, height: 30, borderRadius: '50%', flexShrink: 0,
+            background: 'linear-gradient(135deg, #6366f1 0%, #818cf8 100%)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            boxShadow: '0 2px 8px rgba(99,102,241,0.35)',
+          }}>
+            <Typography fontWeight={800} sx={{ color: '#fff', fontSize: '0.62rem' }}>RP</Typography>
+          </Box>
+          <Box>
+            <Typography variant="caption" fontWeight={700} lineHeight={1.2} display="block">rpamu</Typography>
+            <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.65rem' }}>
+              SDE II &nbsp;·&nbsp; rpamu@extio.io
+            </Typography>
+            <Typography variant="caption" sx={{ fontSize: '0.62rem', color: 'primary.main', fontWeight: 600, display: 'block' }}>
+              EXTIO Technology &amp; Consulting LLP
+            </Typography>
+          </Box>
+        </Box>
+
+        {/* Claude card */}
+        <Box sx={{
+          display: 'inline-flex', alignItems: 'center', gap: 1.25,
+          px: 1.5, py: 1, borderRadius: 2.5,
+          border: '1px solid rgba(249,115,22,0.25)',
+          bgcolor: t => t.palette.mode === 'dark' ? 'rgba(249,115,22,0.06)' : 'rgba(249,115,22,0.04)',
+          position: 'relative', overflow: 'hidden',
+          '&::before': {
+            content: '""', position: 'absolute',
+            top: 0, left: 0, right: 0, height: '2px',
+            background: 'linear-gradient(90deg, #f97316, #fb923c)',
+          },
+        }}>
+          <Box sx={{
+            width: 30, height: 30, borderRadius: '50%', flexShrink: 0,
+            background: 'linear-gradient(135deg, #f97316 0%, #fb923c 100%)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            boxShadow: '0 2px 8px rgba(249,115,22,0.35)',
+          }}>
+            <Typography fontWeight={800} sx={{ color: '#fff', fontSize: '0.62rem' }}>AI</Typography>
+          </Box>
+          <Box>
+            <Typography variant="caption" fontWeight={700} lineHeight={1.2} display="block">Claude</Typography>
+            <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.65rem' }}>
+              AI Pair Programmer &nbsp;·&nbsp; claude.ai
+            </Typography>
+            <Typography variant="caption" sx={{ fontSize: '0.62rem', color: '#f97316', fontWeight: 600, display: 'block' }}>
+              Anthropic
+            </Typography>
+          </Box>
+        </Box>
+
+      </Box>
+      </Box>
+
       {/* Add Card Type Dialog */}
       <Dialog open={addCardDialog} onClose={() => setAddCardDialog(false)} fullWidth maxWidth="xs">
         <DialogTitle>Add Card Type</DialogTitle>
