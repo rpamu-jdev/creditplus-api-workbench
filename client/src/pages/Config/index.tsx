@@ -4,7 +4,6 @@ import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Select from '@mui/material/Select';
-import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
@@ -586,10 +585,8 @@ export default function Config() {
             return (
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
                 <FormControl size="small" sx={{ flex: 1, minWidth: 200 }}>
-                  <InputLabel>Card Type</InputLabel>
                   <Select
                     value={activeKey}
-                    label="Card Type"
                     onChange={e => setActiveTab(cardKeys.indexOf(e.target.value as string))}
                     renderValue={val => {
                       const p = pal(val as string);

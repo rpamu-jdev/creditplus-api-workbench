@@ -66,7 +66,7 @@ export default function ApiOverlay() {
         <Box sx={{
           p: 2.5,
           borderRadius: 2.5,
-          bgcolor: 'grey.50',
+          bgcolor: 'action.hover',
           border: '1px solid',
           borderColor: 'divider',
           minHeight: 90,
